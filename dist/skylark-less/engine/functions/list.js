@@ -1,0 +1,9 @@
+/**
+ * skylark-less - A version of less.js that ported to running on skylarkjs
+ * @author Hudaokeji, Inc.
+ * @version v0.9.0
+ * @link https://github.com/skylarkui/skylark-less/
+ * @license MIT
+ */
+var Comment=require("../tree/comment"),Dimension=require("../tree/dimension"),Declaration=require("../tree/declaration"),Expression=require("../tree/expression"),Ruleset=require("../tree/ruleset"),Selector=require("../tree/selector"),Element=require("../tree/element"),functionRegistry=require("./function-registry"),getItemsFromNode=function(e){return Array.isArray(e.value)?e.value:Array(e)};functionRegistry.addMultiple({_SELF:function(e){return e},extract:function(e,r){return r=r.value-1,getItemsFromNode(e)[r]},length:function(e){return new Dimension(getItemsFromNode(e).length)},range:function(e,r,n){var t,i,a=1,s=[];r?(i=r,t=e.value,n&&(a=n.value)):(t=1,i=e);for(var u=t;u<=i.value;u+=a)s.push(new Dimension(u,i.unit));return new Expression(s)},each:function(e,r){var n,t,i=[];t=e.value?Array.isArray(e.value)?e.value:[e.value]:e.ruleset?e.ruleset.rules:e.rules?e.rules:Array.isArray(e)?e:[e];var a="@value",s="@key",u="@index";r.params?(a=r.params[0]&&r.params[0].name,s=r.params[1]&&r.params[1].name,u=r.params[2]&&r.params[2].name,r=r.rules):r=r.ruleset;for(var l=0;l<t.length;l++){var o,m,c=t[l];c instanceof Declaration?(o="string"==typeof c.name?c.name:c.name[0].value,m=c.value):(o=new Dimension(l+1),m=c),c instanceof Comment||(n=r.rules.slice(0),a&&n.push(new Declaration(a,m,!1,!1,this.index,this.currentFileInfo)),u&&n.push(new Declaration(u,new Dimension(l+1),!1,!1,this.index,this.currentFileInfo)),s&&n.push(new Declaration(s,o,!1,!1,this.index,this.currentFileInfo)),i.push(new Ruleset([new Selector([new Element("","&")])],n,r.strictImports,r.visibilityInfo())))}return new Ruleset([new Selector([new Element("","&")])],i,r.strictImports,r.visibilityInfo()).eval(this.context)}});
+//# sourceMappingURL=../../sourcemaps/engine/functions/list.js.map

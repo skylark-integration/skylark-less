@@ -1,0 +1,1 @@
+{"version":3,"sources":["less.js"],"names":["define","skylark","less"],"mappings":";;;;;;;AAAAA,QACC,wBACA,mBACC,SAASC,EAAQC,GAClB,OAAOD,EAAQC,KAAOA","file":"../less.js","sourcesContent":["define([\r\n\t\"skylark-langx/skylark\",\r\n\t\"./browser/index\"\r\n],function(skylark,less){\r\n\treturn skylark.less = less;\r\n})"]}

@@ -1,0 +1,9 @@
+/**
+ * skylark-less - A version of less.js that ported to running on skylarkjs
+ * @author Hudaokeji, Inc.
+ * @version v0.9.0
+ * @link https://github.com/skylarkui/skylark-less/
+ * @license MIT
+ */
+module.exports=function(e,t){var o=function(e){this.options=e};return o.prototype.toCSS=function(t,o,s){var p=new e({contentsIgnoredCharsMap:s.contentsIgnoredChars,rootNode:t,contentsMap:s.contents,sourceMapFilename:this.options.sourceMapFilename,sourceMapURL:this.options.sourceMapURL,outputFilename:this.options.sourceMapOutputFilename,sourceMapBasepath:this.options.sourceMapBasepath,sourceMapRootpath:this.options.sourceMapRootpath,outputSourceFiles:this.options.outputSourceFiles,sourceMapGenerator:this.options.sourceMapGenerator,sourceMapFileInline:this.options.sourceMapFileInline}),n=p.toCSS(o);return this.sourceMap=p.sourceMap,this.sourceMapURL=p.sourceMapURL,this.options.sourceMapInputFilename&&(this.sourceMapInputFilename=p.normalizeFilename(this.options.sourceMapInputFilename)),void 0!==this.options.sourceMapBasepath&&void 0!==this.sourceMapURL&&(this.sourceMapURL=p.removeBasepath(this.sourceMapURL)),n+this.getCSSAppendage()},o.prototype.getCSSAppendage=function(){var e=this.sourceMapURL;if(this.options.sourceMapFileInline){if(void 0===this.sourceMap)return"";e="data:application/json;base64,"+t.encodeBase64(this.sourceMap)}return e?"/*# sourceMappingURL="+e+" */":""},o.prototype.getExternalSourceMap=function(){return this.sourceMap},o.prototype.setExternalSourceMap=function(e){this.sourceMap=e},o.prototype.isInline=function(){return this.options.sourceMapFileInline},o.prototype.getSourceMapURL=function(){return this.sourceMapURL},o.prototype.getOutputFilename=function(){return this.options.sourceMapOutputFilename},o.prototype.getInputFilename=function(){return this.sourceMapInputFilename},o};
+//# sourceMappingURL=../sourcemaps/engine/source-map-builder.js.map

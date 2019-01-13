@@ -1,0 +1,1 @@
+{"version":3,"sources":["engine/data/index.js"],"names":["module","exports","colors","require","unitConversions"],"mappings":";;;;;;;AAAAA,OAAOC,SACHC,OAAQC,QAAQ,YAChBC,gBAAiBD,QAAQ","file":"../../../engine/data/index.js","sourcesContent":["module.exports = {\n    colors: require('./colors'),\n    unitConversions: require('./unit-conversions')\n};"]}

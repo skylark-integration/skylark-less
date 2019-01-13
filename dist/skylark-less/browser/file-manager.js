@@ -1,0 +1,9 @@
+/**
+ * skylark-less - A version of less.js that ported to running on skylarkjs
+ * @author Hudaokeji, Inc.
+ * @version v0.9.0
+ * @link https://github.com/skylarkui/skylark-less/
+ * @license MIT
+ */
+module.exports=function(e,t){var n=require("../engine/environment/abstract-file-manager.js"),o={},s=function(){};return(s.prototype=new n).alwaysMakePathsAbsolute=function(){return!0},s.prototype.join=function(e,t){return e?this.extractUrlParts(t,e).path:t},s.prototype.doXHR=function(n,o,s,r){var i=new XMLHttpRequest,a=!e.isFileProtocol||e.fileAsync;function u(e,t,o){e.status>=200&&e.status<300?t(e.responseText,e.getResponseHeader("Last-Modified")):"function"==typeof o&&o(e.status,n)}"function"==typeof i.overrideMimeType&&i.overrideMimeType("text/css"),t.debug("XHR: Getting '"+n+"'"),i.open("GET",n,a),i.setRequestHeader("Accept",o||"text/x-less, text/css; q=0.9, */*; q=0.5"),i.send(null),e.isFileProtocol&&!e.fileAsync?0===i.status||i.status>=200&&i.status<300?s(i.responseText):r(i.status,n):a?i.onreadystatechange=function(){4==i.readyState&&u(i,s,r)}:u(i,s,r)},s.prototype.supports=function(e,t,n,o){return!0},s.prototype.clearFileCache=function(){o={}},s.prototype.loadFile=function(e,t,n,s){t&&!this.isPathAbsolute(e)&&(e=t+e),e=n.ext?this.tryAppendExtension(e,n.ext):e,n=n||{};var r=this.extractUrlParts(e,window.location.href).url,i=this;return new Promise(function(e,t){if(n.useFileCache&&o[r])try{var s=o[r];return e({contents:s,filename:r,webInfo:{lastModified:new Date}})}catch(e){return t({filename:r,message:"Error loading file "+r+" error was "+e.message})}i.doXHR(r,n.mime,function(t,n){o[r]=t,e({contents:t,filename:r,webInfo:{lastModified:n}})},function(e,n){t({type:"File",message:"'"+n+"' wasn't found ("+e+")",href:r})})})},s};
+//# sourceMappingURL=../sourcemaps/browser/file-manager.js.map
