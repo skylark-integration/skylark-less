@@ -5,5 +5,5 @@
  * @link https://github.com/skylarkui/skylark-less/
  * @license MIT
  */
-module.exports={extractId:function(e){return e.replace(/^[a-z-]+:\/+?[^\/]+/,"").replace(/[\?\&]livereload=\w+/,"").replace(/^\//,"").replace(/\.[a-zA-Z]+$/,"").replace(/[^\.\w-]+/g,"-").replace(/\./g,":")},addDataAttr:function(e,a){for(var r in a.dataset)if(a.dataset.hasOwnProperty(r))if("env"===r||"dumpLineNumbers"===r||"rootpath"===r||"errorReporting"===r)e[r]=a.dataset[r];else try{e[r]=JSON.parse(a.dataset[r])}catch(e){}}};
+define([],function(){"use strict";var r={},e={exports:{}};function t(r){return"object"!=typeof r||Array.isArray(r)||!function(r){var e;for(e in r)return!1;return!0}(r)}return e.exports={extractId:function(r){return r.replace(/^[a-z-]+:\/+?[^\/]+/,"").replace(/[\?\&]livereload=\w+/,"").replace(/^\//,"").replace(/\.[a-zA-Z]+$/,"").replace(/[^\.\w-]+/g,"-").replace(/\./g,":")},addDataAttr:function(r,e){for(var t in e.dataset)if(e.dataset.hasOwnProperty(t))if("env"===t||"dumpLineNumbers"===t||"rootpath"===t||"errorReporting"===t)r[t]=e.dataset[t];else try{r[t]=JSON.parse(e.dataset[t])}catch(r){}}},t(e.exports)?e.exports:t(r)?r:void 0});
 //# sourceMappingURL=../sourcemaps/browser/utils.js.map

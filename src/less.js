@@ -1,6 +1,5 @@
 define([
-	"skylark-langx/skylark",
-	"./browser/index"
-],function(skylark,less){
+	"skylark-langx/skylark"
+],function(skylark){
 	return skylark.less = less;
 })

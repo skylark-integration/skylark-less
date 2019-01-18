@@ -5,5 +5,5 @@
  * @link https://github.com/skylarkui/skylark-less/
  * @license MIT
  */
-define(["skylark-langx/skylark","./browser/index"],function(e,n){return e.less=n});
+define(["skylark-langx/skylark"],function(s){return s.less=less});
 //# sourceMappingURL=sourcemaps/less.js.map

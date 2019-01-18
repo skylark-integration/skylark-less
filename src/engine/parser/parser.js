@@ -1,6 +1,6 @@
 var LessError = require('../less-error'),
-    tree = require('../tree'),
-    visitors = require('../visitors'),
+    tree = require('../tree/index'),
+    visitors = require('../visitors/index'),
     getParserInput = require('./parser-input'),
     utils = require('../utils'),
     functionRegistry = require('../functions/function-registry');

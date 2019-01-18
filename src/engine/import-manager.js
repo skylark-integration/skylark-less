@@ -2,7 +2,8 @@ var contexts = require('./contexts'),
     Parser = require('./parser/parser'),
     LessError = require('./less-error'),
     utils = require('./utils'),
-    PromiseConstructor = typeof Promise === 'undefined' ? require('promise') : Promise,
+//    PromiseConstructor = typeof Promise === 'undefined' ? require('promise') : Promise,
+    PromiseConstructor =  Promise,
     logger = require('./logger');
 
 module.exports = function(environment) {

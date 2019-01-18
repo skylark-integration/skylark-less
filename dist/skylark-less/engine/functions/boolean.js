@@ -5,5 +5,5 @@
  * @link https://github.com/skylarkui/skylark-less/
  * @license MIT
  */
-var functionRegistry=require("./function-registry"),Anonymous=require("../tree/anonymous"),Keyword=require("../tree/keyword");functionRegistry.addMultiple({boolean:function(e){return e?Keyword.True:Keyword.False},if:function(e,r,n){return e?r:n||new Anonymous}});
+define(["./function-registry","../tree/anonymous","../tree/keyword"],function(r,n,e){"use strict";var t={},u={},o=n,i=e;function f(r){return"object"!=typeof r||Array.isArray(r)||!function(r){var n;for(n in r)return!1;return!0}(r)}return r.addMultiple({boolean:function(r){return r?i.True:i.False},if:function(r,n,e){return r?n:e||new o}}),f(u)?u:f(t)?t:void 0});
 //# sourceMappingURL=../../sourcemaps/engine/functions/boolean.js.map

@@ -2,7 +2,7 @@
 
 module.exports = function(options, logger) {
 
-    var AbstractFileManager = require('../engine/environment/abstract-file-manager.js');
+    var AbstractFileManager = require('../engine/environment/abstract-file-manager');
 
     var fileCache = {};
 

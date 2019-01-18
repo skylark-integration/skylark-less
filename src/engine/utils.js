@@ -1,6 +1,6 @@
 /* jshint proto: true */
 var Constants = require('./constants');
-var clone = require('clone');
+//var clone = require('clone');
 
 var utils = {
     getLocation: function(index, inputStream) {
@@ -86,9 +86,9 @@ var utils = {
         var newObj = obj2 || {};
         if (!obj2._defaults) {
             newObj = {};
-            var defaults = clone(obj1);
+            var defaults = utils.clone(obj1);
             newObj._defaults = defaults;
-            var cloned = obj2 ? clone(obj2) : {};
+            var cloned = obj2 ? utils.clone(obj2) : {};
             Object.assign(newObj, defaults, cloned);
         }
         return newObj;

@@ -1,5 +1,5 @@
 var functionRegistry = require('./function-registry'),
-    mathHelper = require('./math-helper.js');
+    mathHelper = require('./math-helper');
 
 var mathFunctions = {
     // name,  unit

@@ -1,49 +1,67 @@
-function ImportSequencer(onSequencerEmpty) {
-    this.imports = [];
-    this.variableImports = [];
-    this._onSequencerEmpty = onSequencerEmpty;
-    this._currentDepth = 0;
-}
-ImportSequencer.prototype.addImport = function (callback) {
-    var importSequencer = this, importItem = {
-            callback: callback,
-            args: null,
-            isReady: false
+define([], function () {
+    'use strict';
+    var exports = {};
+    var module = { exports: {} };
+    function ImportSequencer(onSequencerEmpty) {
+        this.imports = [];
+        this.variableImports = [];
+        this._onSequencerEmpty = onSequencerEmpty;
+        this._currentDepth = 0;
+    }
+    ImportSequencer.prototype.addImport = function (callback) {
+        var importSequencer = this, importItem = {
+                callback: callback,
+                args: null,
+                isReady: false
+            };
+        this.imports.push(importItem);
+        return function () {
+            importItem.args = Array.prototype.slice.call(arguments, 0);
+            importItem.isReady = true;
+            importSequencer.tryRun();
         };
-    this.imports.push(importItem);
-    return function () {
-        importItem.args = Array.prototype.slice.call(arguments, 0);
-        importItem.isReady = true;
-        importSequencer.tryRun();
     };
-};
-ImportSequencer.prototype.addVariableImport = function (callback) {
-    this.variableImports.push(callback);
-};
-ImportSequencer.prototype.tryRun = function () {
-    this._currentDepth++;
-    try {
-        while (true) {
-            while (this.imports.length > 0) {
-                var importItem = this.imports[0];
-                if (!importItem.isReady) {
-                    return;
+    ImportSequencer.prototype.addVariableImport = function (callback) {
+        this.variableImports.push(callback);
+    };
+    ImportSequencer.prototype.tryRun = function () {
+        this._currentDepth++;
+        try {
+            while (true) {
+                while (this.imports.length > 0) {
+                    var importItem = this.imports[0];
+                    if (!importItem.isReady) {
+                        return;
+                    }
+                    this.imports = this.imports.slice(1);
+                    importItem.callback.apply(null, importItem.args);
                 }
-                this.imports = this.imports.slice(1);
-                importItem.callback.apply(null, importItem.args);
+                if (this.variableImports.length === 0) {
+                    break;
+                }
+                var variableImport = this.variableImports[0];
+                this.variableImports = this.variableImports.slice(1);
+                variableImport();
             }
-            if (this.variableImports.length === 0) {
-                break;
-            }
-            var variableImport = this.variableImports[0];
-            this.variableImports = this.variableImports.slice(1);
-            variableImport();
+        } finally {
+            this._currentDepth--;
         }
-    } finally {
-        this._currentDepth--;
+        if (this._currentDepth === 0 && this._onSequencerEmpty) {
+            this._onSequencerEmpty();
+        }
+    };
+    module.exports = ImportSequencer;
+    function __isEmptyObject(obj) {
+        var attr;
+        for (attr in obj)
+            return !1;
+        return !0;
     }
-    if (this._currentDepth === 0 && this._onSequencerEmpty) {
-        this._onSequencerEmpty();
+    function __isValidToReturn(obj) {
+        return typeof obj != 'object' || Array.isArray(obj) || !__isEmptyObject(obj);
     }
-};
-module.exports = ImportSequencer;
+    if (__isValidToReturn(module.exports))
+        return module.exports;
+    else if (__isValidToReturn(exports))
+        return exports;
+});

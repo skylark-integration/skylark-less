@@ -1,7 +1,7 @@
 // TODO: Add tests for browser @plugin
 /* global window */
 
-var AbstractPluginLoader = require('../engine/environment/abstract-plugin-loader.js');
+var AbstractPluginLoader = require('../engine/environment/abstract-plugin-loader');
 
 /**
  * Browser Plugin Loader

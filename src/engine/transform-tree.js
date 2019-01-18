@@ -1,6 +1,6 @@
 var contexts = require('./contexts'),
-    visitor = require('./visitors'),
-    tree = require('./tree');
+    visitor = require('./visitors/index'),
+    tree = require('./tree/index');
 
 module.exports = function(root, options) {
     options = options || {};

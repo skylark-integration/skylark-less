@@ -5,5 +5,5 @@
  * @link https://github.com/skylarkui/skylark-less/
  * @license MIT
  */
-module.exports={colors:require("./colors"),unitConversions:require("./unit-conversions")};
+define(["./colors","./unit-conversions"],function(r,o){"use strict";var n={},t={exports:{}};function e(r){return"object"!=typeof r||Array.isArray(r)||!function(r){var o;for(o in r)return!1;return!0}(r)}return t.exports={colors:r,unitConversions:o},e(t.exports)?t.exports:e(n)?n:void 0});
 //# sourceMappingURL=../../sourcemaps/engine/data/index.js.map

@@ -5,5 +5,5 @@
  * @link https://github.com/skylarkui/skylark-less/
  * @license MIT
  */
-var Node=require("./node"),Assignment=function(e,t){this.key=e,this.value=t};Assignment.prototype=new Node,Assignment.prototype.type="Assignment",Assignment.prototype.accept=function(e){this.value=e.visit(this.value)},Assignment.prototype.eval=function(e){return this.value.eval?new Assignment(this.key,this.value.eval(e)):this},Assignment.prototype.genCSS=function(e,t){t.add(this.key+"="),this.value.genCSS?this.value.genCSS(e,t):t.add(this.value)},module.exports=Assignment;
+define(["./node"],function(t){"use strict";var e={},n={exports:{}},i=function(t,e){this.key=t,this.value=e};function r(t){return"object"!=typeof t||Array.isArray(t)||!function(t){var e;for(e in t)return!1;return!0}(t)}return(i.prototype=new t).type="Assignment",i.prototype.accept=function(t){this.value=t.visit(this.value)},i.prototype.eval=function(t){return this.value.eval?new i(this.key,this.value.eval(t)):this},i.prototype.genCSS=function(t,e){e.add(this.key+"="),this.value.genCSS?this.value.genCSS(t,e):e.add(this.value)},n.exports=i,r(n.exports)?n.exports:r(e)?e:void 0});
 //# sourceMappingURL=../../sourcemaps/engine/tree/assignment.js.map

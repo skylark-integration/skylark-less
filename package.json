@@ -27,7 +27,7 @@
   "skylarkjs": {
     "build": {
       "prepare": {
-        "es6toamd": true
+        "cjstoamd": true
       }
     }
   },

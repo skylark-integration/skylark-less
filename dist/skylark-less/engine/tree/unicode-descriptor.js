@@ -5,5 +5,5 @@
  * @link https://github.com/skylarkui/skylark-less/
  * @license MIT
  */
-var Node=require("./node"),UnicodeDescriptor=function(e){this.value=e};UnicodeDescriptor.prototype=new Node,UnicodeDescriptor.prototype.type="UnicodeDescriptor",module.exports=UnicodeDescriptor;
+define(["./node"],function(r){"use strict";var t={},e={exports:{}},n=function(r){this.value=r};function o(r){return"object"!=typeof r||Array.isArray(r)||!function(r){var t;for(t in r)return!1;return!0}(r)}return(n.prototype=new r).type="UnicodeDescriptor",e.exports=n,o(e.exports)?e.exports:o(t)?t:void 0});
 //# sourceMappingURL=../../sourcemaps/engine/tree/unicode-descriptor.js.map

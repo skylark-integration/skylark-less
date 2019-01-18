@@ -5,5 +5,5 @@
  * @link https://github.com/skylarkui/skylark-less/
  * @license MIT
  */
-var Node=require("./node"),getDebugInfo=require("./debug-info"),Comment=function(e,t,o,n){this.value=e,this.isLineComment=t,this._index=o,this._fileInfo=n,this.allowRoot=!0};Comment.prototype=new Node,Comment.prototype.type="Comment",Comment.prototype.genCSS=function(e,t){this.debugInfo&&t.add(getDebugInfo(e,this),this.fileInfo(),this.getIndex()),t.add(this.value)},Comment.prototype.isSilent=function(e){var t=e.compress&&"!"!==this.value[2];return this.isLineComment||t},module.exports=Comment;
+define(["./node","./debug-info"],function(t,e){"use strict";var n={},i={exports:{}},o=e,r=function(t,e,n,i){this.value=t,this.isLineComment=e,this._index=n,this._fileInfo=i,this.allowRoot=!0};function s(t){return"object"!=typeof t||Array.isArray(t)||!function(t){var e;for(e in t)return!1;return!0}(t)}return(r.prototype=new t).type="Comment",r.prototype.genCSS=function(t,e){this.debugInfo&&e.add(o(t,this),this.fileInfo(),this.getIndex()),e.add(this.value)},r.prototype.isSilent=function(t){var e=t.compress&&"!"!==this.value[2];return this.isLineComment||e},i.exports=r,s(i.exports)?i.exports:s(n)?n:void 0});
 //# sourceMappingURL=../../sourcemaps/engine/tree/comment.js.map

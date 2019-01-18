@@ -5,5 +5,5 @@
  * @link https://github.com/skylarkui/skylark-less/
  * @license MIT
  */
-module.exports={Math:{ALWAYS:0,PARENS_DIVISION:1,PARENS:2,STRICT_LEGACY:3},RewriteUrls:{OFF:0,LOCAL:1,ALL:2}};
+define([],function(){"use strict";var r={},t={exports:{}};function e(r){return"object"!=typeof r||Array.isArray(r)||!function(r){var t;for(t in r)return!1;return!0}(r)}return t.exports={Math:{ALWAYS:0,PARENS_DIVISION:1,PARENS:2,STRICT_LEGACY:3},RewriteUrls:{OFF:0,LOCAL:1,ALL:2}},e(t.exports)?t.exports:e(r)?r:void 0});
 //# sourceMappingURL=../sourcemaps/engine/constants.js.map

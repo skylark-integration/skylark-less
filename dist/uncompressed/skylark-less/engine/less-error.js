@@ -1,87 +1,105 @@
-var utils = require('./utils');
-var LessError = module.exports = function LessError(e, fileContentMap, currentFilename) {
-    Error.call(this);
-    var filename = e.filename || currentFilename;
-    this.message = e.message;
-    this.stack = e.stack;
-    if (fileContentMap && filename) {
-        var input = fileContentMap.contents[filename], loc = utils.getLocation(e.index, input), line = loc.line, col = loc.column, callLine = e.call && utils.getLocation(e.call, input).line, lines = input ? input.split('\n') : '';
-        this.type = e.type || 'Syntax';
-        this.filename = filename;
-        this.index = e.index;
-        this.line = typeof line === 'number' ? line + 1 : null;
-        this.column = col;
-        if (!this.line && this.stack) {
-            var found = this.stack.match(/(<anonymous>|Function):(\d+):(\d+)/);
-            if (found) {
-                if (found[2]) {
-                    this.line = parseInt(found[2]) - 2;
-                }
-                if (found[3]) {
-                    this.column = parseInt(found[3]);
+define(['./utils'], function (__module__0) {
+    'use strict';
+    var exports = {};
+    var module = { exports: {} };
+    var utils = __module__0;
+    var LessError = module.exports = function LessError(e, fileContentMap, currentFilename) {
+        Error.call(this);
+        var filename = e.filename || currentFilename;
+        this.message = e.message;
+        this.stack = e.stack;
+        if (fileContentMap && filename) {
+            var input = fileContentMap.contents[filename], loc = utils.getLocation(e.index, input), line = loc.line, col = loc.column, callLine = e.call && utils.getLocation(e.call, input).line, lines = input ? input.split('\n') : '';
+            this.type = e.type || 'Syntax';
+            this.filename = filename;
+            this.index = e.index;
+            this.line = typeof line === 'number' ? line + 1 : null;
+            this.column = col;
+            if (!this.line && this.stack) {
+                var found = this.stack.match(/(<anonymous>|Function):(\d+):(\d+)/);
+                if (found) {
+                    if (found[2]) {
+                        this.line = parseInt(found[2]) - 2;
+                    }
+                    if (found[3]) {
+                        this.column = parseInt(found[3]);
+                    }
                 }
             }
+            this.callLine = callLine + 1;
+            this.callExtract = lines[callLine];
+            this.extract = [
+                lines[this.line - 2],
+                lines[this.line - 1],
+                lines[this.line]
+            ];
         }
-        this.callLine = callLine + 1;
-        this.callExtract = lines[callLine];
-        this.extract = [
-            lines[this.line - 2],
-            lines[this.line - 1],
-            lines[this.line]
-        ];
-    }
-};
-if (typeof Object.create === 'undefined') {
-    var F = function () {
     };
-    F.prototype = Error.prototype;
-    LessError.prototype = new F();
-} else {
-    LessError.prototype = Object.create(Error.prototype);
-}
-LessError.prototype.constructor = LessError;
-LessError.prototype.toString = function (options) {
-    options = options || {};
-    var message = '';
-    var extract = this.extract || [];
-    var error = [];
-    var stylize = function (str) {
-        return str;
-    };
-    if (options.stylize) {
-        var type = typeof options.stylize;
-        if (type !== 'function') {
-            throw Error('options.stylize should be a function, got a ' + type + '!');
-        }
-        stylize = options.stylize;
+    if (typeof Object.create === 'undefined') {
+        var F = function () {
+        };
+        F.prototype = Error.prototype;
+        LessError.prototype = new F();
+    } else {
+        LessError.prototype = Object.create(Error.prototype);
     }
-    if (this.line !== null) {
-        if (typeof extract[0] === 'string') {
-            error.push(stylize(this.line - 1 + ' ' + extract[0], 'grey'));
-        }
-        if (typeof extract[1] === 'string') {
-            var errorTxt = this.line + ' ';
-            if (extract[1]) {
-                errorTxt += extract[1].slice(0, this.column) + stylize(stylize(stylize(extract[1].substr(this.column, 1), 'bold') + extract[1].slice(this.column + 1), 'red'), 'inverse');
+    LessError.prototype.constructor = LessError;
+    LessError.prototype.toString = function (options) {
+        options = options || {};
+        var message = '';
+        var extract = this.extract || [];
+        var error = [];
+        var stylize = function (str) {
+            return str;
+        };
+        if (options.stylize) {
+            var type = typeof options.stylize;
+            if (type !== 'function') {
+                throw Error('options.stylize should be a function, got a ' + type + '!');
             }
-            error.push(errorTxt);
+            stylize = options.stylize;
         }
-        if (typeof extract[2] === 'string') {
-            error.push(stylize(this.line + 1 + ' ' + extract[2], 'grey'));
+        if (this.line !== null) {
+            if (typeof extract[0] === 'string') {
+                error.push(stylize(this.line - 1 + ' ' + extract[0], 'grey'));
+            }
+            if (typeof extract[1] === 'string') {
+                var errorTxt = this.line + ' ';
+                if (extract[1]) {
+                    errorTxt += extract[1].slice(0, this.column) + stylize(stylize(stylize(extract[1].substr(this.column, 1), 'bold') + extract[1].slice(this.column + 1), 'red'), 'inverse');
+                }
+                error.push(errorTxt);
+            }
+            if (typeof extract[2] === 'string') {
+                error.push(stylize(this.line + 1 + ' ' + extract[2], 'grey'));
+            }
+            error = error.join('\n') + stylize('', 'reset') + '\n';
         }
-        error = error.join('\n') + stylize('', 'reset') + '\n';
+        message += stylize(this.type + 'Error: ' + this.message, 'red');
+        if (this.filename) {
+            message += stylize(' in ', 'red') + this.filename;
+        }
+        if (this.line) {
+            message += stylize(' on line ' + this.line + ', column ' + (this.column + 1) + ':', 'grey');
+        }
+        message += '\n' + error;
+        if (this.callLine) {
+            message += stylize('from ', 'red') + (this.filename || '') + '/n';
+            message += stylize(this.callLine, 'grey') + ' ' + this.callExtract + '/n';
+        }
+        return message;
+    };
+    function __isEmptyObject(obj) {
+        var attr;
+        for (attr in obj)
+            return !1;
+        return !0;
     }
-    message += stylize(this.type + 'Error: ' + this.message, 'red');
-    if (this.filename) {
-        message += stylize(' in ', 'red') + this.filename;
+    function __isValidToReturn(obj) {
+        return typeof obj != 'object' || Array.isArray(obj) || !__isEmptyObject(obj);
     }
-    if (this.line) {
-        message += stylize(' on line ' + this.line + ', column ' + (this.column + 1) + ':', 'grey');
-    }
-    message += '\n' + error;
-    if (this.callLine) {
-        message += stylize('from ', 'red') + (this.filename || '') + '/n';
-        message += stylize(this.callLine, 'grey') + ' ' + this.callExtract + '/n';
-    }
-    return message;
-};
+    if (__isValidToReturn(module.exports))
+        return module.exports;
+    else if (__isValidToReturn(exports))
+        return exports;
+});

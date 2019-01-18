@@ -1,4 +1,25 @@
-module.exports = {
-    colors: require('./colors'),
-    unitConversions: require('./unit-conversions')
-};
+define([
+    './colors',
+    './unit-conversions'
+], function (__module__0, __module__1) {
+    'use strict';
+    var exports = {};
+    var module = { exports: {} };
+    module.exports = {
+        colors: __module__0,
+        unitConversions: __module__1
+    };
+    function __isEmptyObject(obj) {
+        var attr;
+        for (attr in obj)
+            return !1;
+        return !0;
+    }
+    function __isValidToReturn(obj) {
+        return typeof obj != 'object' || Array.isArray(obj) || !__isEmptyObject(obj);
+    }
+    if (__isValidToReturn(module.exports))
+        return module.exports;
+    else if (__isValidToReturn(exports))
+        return exports;
+});

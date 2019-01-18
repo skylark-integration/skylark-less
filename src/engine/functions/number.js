@@ -1,7 +1,7 @@
 var Dimension = require('../tree/dimension'),
     Anonymous = require('../tree/anonymous'),
     functionRegistry = require('./function-registry'),
-    mathHelper = require('./math-helper.js');
+    mathHelper = require('./math-helper');
 
 var minMax = function (isMin, args) {
     args = Array.prototype.slice.call(args);

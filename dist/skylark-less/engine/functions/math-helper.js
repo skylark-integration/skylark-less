@@ -5,5 +5,5 @@
  * @link https://github.com/skylarkui/skylark-less/
  * @license MIT
  */
-var Dimension=require("../tree/dimension"),MathHelper=function(){};MathHelper._math=function(e,n,t){if(!(t instanceof Dimension))throw{type:"Argument",message:"argument must be a number"};return null==n?n=t.unit:t=t.unify(),new Dimension(e(parseFloat(t.value)),n)},module.exports=MathHelper;
+define(["../tree/dimension"],function(e){"use strict";var n={},r={exports:{}},t=e,u=function(){};function o(e){return"object"!=typeof e||Array.isArray(e)||!function(e){var n;for(n in e)return!1;return!0}(e)}return u._math=function(e,n,r){if(!(r instanceof t))throw{type:"Argument",message:"argument must be a number"};return null==n?n=r.unit:r=r.unify(),new t(e(parseFloat(r.value)),n)},r.exports=u,o(r.exports)?r.exports:o(n)?n:void 0});
 //# sourceMappingURL=../../sourcemaps/engine/functions/math-helper.js.map
